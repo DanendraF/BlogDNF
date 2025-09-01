@@ -1,0 +1,36 @@
+### List all posts (public)
+GET http://localhost:3001/api/posts
+
+### Register user (contoh register manual, jika ada endpoint POST /api/users)
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "email": "user1@example.com",
+  "full_name": "User Satu",
+  "avatar_url": "https://i.pravatar.cc/150?img=1"
+}
+
+### Login (Supabase Auth, biasanya dilakukan di frontend, bukan backend)
+# Untuk login Supabase, gunakan SDK di frontend. 
+# Jika ingin test login manual, gunakan endpoint Supabase Auth REST API:
+POST https://<YOUR_SUPABASE_PROJECT>.supabase.co/auth/v1/token?grant_type=password
+apikey: <YOUR_SUPABASE_ANON_KEY>
+Content-Type: application/json
+
+{
+  "email": "user1@example.com",
+  "password": "passwordanda"
+}
+
+### Create post (butuh token login, ganti <token> dengan access_token hasil login)
+POST http://localhost:3001/api/posts
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "title": "Judul Post Baru",
+  "slug": "judul-post-baru",
+  "content": "Isi artikel",
+  "author_id": "uuid-author"
+}
